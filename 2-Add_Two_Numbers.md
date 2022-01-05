@@ -1,6 +1,6 @@
-# Promble 2 #
+# Promble 2 - Add Two Numbers #
 
-## First Passed virsion ##
+## Original virsion ##
 ```
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
@@ -72,4 +72,35 @@ class Solution:
                     result = new_node
                     result.val = flag
         return start
+```
+
+Outline:
+Determine whether the two linked-lists are empty and the carry.
+
+Improve:
+Get the value from two linked-lists, if empty, then consider as 0. In this case, only have to concern the carry.
+
+## Better Solution
+```
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        carry = 0
+        result_head = ListNode()
+        result_tail= result_head
+        while l1 or l2:
+            num1 = l1.val if l1 else 0
+            num2 = l2.val if l2 else 0
+            sum = num1 + num2 + carry
+            carry = sum // 10
+            result_tail.next = ListNode(sum % 10)
+            result_tail = result_tail.next
+            if l1 is not None:
+                l1 = l1.next
+            if l2 is not None:
+                l2 = l2.next
+            # tip 1: an elegant way to deal with carry when both linked-lists are end
+            if carry > 0:
+                result_tail.next = ListNode(carry)
+        # tip 2: return head.next to simplify formatting!
+        return result_head.next
 ```
