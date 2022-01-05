@@ -104,3 +104,4 @@ class Solution:
         # tip 2: return head.next to simplify formatting!
         return result_head.next
 ```
+*: 2 tips
